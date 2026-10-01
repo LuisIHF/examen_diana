@@ -15,17 +15,18 @@ button{border:1px solid var(--ac);background:none;color:var(--ac);padding:6px 12
 button.on{background:var(--ac);color:#fff}
 .q{padding:10px 0;border-bottom:1px solid var(--bd);break-inside:avoid}
 .q b.n{color:var(--ac)}
-.o{margin:2px 0 2px 18px}
+.o{margin:2px 0 2px 18px}.k label.right{background:var(--ok);font-weight:600}
 .line{border-bottom:1px solid var(--mut);height:1.6em;margin:4px 0 4px 18px}
 .pt{margin:3px 0 3px 18px}
 .k .right{background:var(--ok);border-radius:4px;font-weight:600}
 .meta{color:var(--mut);font-size:.9rem}
 svg{max-width:100%;height:auto;display:block;margin:8px auto}
+textarea,input[type=text]{width:calc(100% - 18px);margin:3px 0 3px 18px;box-sizing:border-box;font:inherit;background:var(--bg);color:var(--fg);border:1px solid var(--bd);border-radius:6px;padding:6px}label{cursor:pointer;display:block;border-radius:4px;padding:1px 4px}label.i{display:inline-block;margin-right:8px}.good{background:var(--ok)}.bad{background:#f8d7da;color:#333}
 @media print{.bar{display:none}}
 </style></head><body><main>
-<h1>Examen Colorimetría – Repaso</h1>
+<h1 id="h">Examen Colorimetría – Repaso</h1>
 <p class="meta">Centro de Estilismo Profesional · Nombre: ____________________ Fecha: __________</p>
-<div class="bar"><button id="b1" class="on">1 · Sin respuestas</button><button id="b2">2 · Opción múltiple</button><button id="bk" style="display:none">Mostrar clave</button><button onclick="print()">Imprimir</button></div>
+<div class="bar"><select id="ex" style="padding:6px;border-radius:8px;font:inherit"></select><button id="b1" class="on">1 · Sin respuestas</button><button id="b2">2 · Opción múltiple</button><button id="bg" style="display:none">Calificar</button><button id="bk" style="display:none">Mostrar clave</button><span id="sc" style="align-self:center;font-weight:600"></span><button onclick="print()">Imprimir</button></div>
 <div id="out"></div>
 <p class="meta">Algunas respuestas (22, 35, 36, 38, 44) dependen del manual del curso; verifícalas con tu material.</p>
 </main>
@@ -34,7 +35,7 @@ const L='ABCD';
 const m=(t,c,...d)=>({k:'m',t,c,d});
 const p=(t,P)=>({k:'p',t,P});
 const x=(t,I,O,A)=>({k:'x',t,I,O,A});
-const Q=[
+let Q=[
 m('¿Cuál es la principal área de trabajo del estilista?','El cabello','La piel','Las uñas','El rostro'),
 m('¿De qué está formado un cabello?','Fibra de queratina constituida por una raíz y un tallo','Grasa y agua únicamente','Fibra de colágeno con bulbo y papila','Células de melanina'),
 x('Une con una flecha según la fase correspondiente.',['Está pegado a la papila, nace y crece. Dura entre 4 y 6 años','Fase de transición, dura unas 3 semanas. El bulbo toma aspecto cilíndrico','Fase de descanso y caída, dura aproximadamente 3 meses'],['Fase anágena','Fase catágena','Fase telógena'],[0,1,2]),
@@ -81,6 +82,87 @@ m('Escribe los diseños de color aprendidos en este módulo.','Universales, bala
 {k:'head',t:'Dibuja y traza el diseño para mechas Tropicales.'},
 m('Explica la regla del 11 y en qué la utilizarías.','Se usa en situaciones de emergencia o para personalizar tus propios tintes','Para calcular el volumen del peróxido','Para medir el tiempo de pose','Para elegir el cepillo'),
 ];
+
+const Mq=[
+m('¿Qué es el maquillaje?','Técnica para realzar la belleza del ser humano y expresar emociones','Tratamiento médico de la piel','Producto para limpiar el rostro','Técnica de corte de cabello'),
+m('¿Qué es la piel y cuáles son sus capas?','Órgano más grande y protección del cuerpo; epidermis, dermis e hipodermis','Un músculo; solo epidermis','Un hueso; dermis y cartílago','Una glándula; epidermis y folículo'),
+m('Es la capa externa y responsable de la salud y apariencia de la piel.','Epidermis','Dermis','Hipodermis','Cutícula'),
+m('¿Qué es la dermis?','La capa media de la piel (colágeno, elastina, vasos y glándulas)','La capa más externa','El músculo del rostro','El tejido graso'),
+m('Así se llama el tejido subcutáneo de la piel.','Hipodermis','Epidermis','Dermis','Corteza'),
+m('Menciona algunos músculos del rostro.','Frontal, superciliar, triangular, elevador del labio, esternocleidomastoideo','Bíceps, tríceps y deltoides','Glúteo, cuádriceps y gemelo','Pectoral, dorsal y abdominal'),
+m('Escribe 3 tipos de piel.','Grasa, mixta y seca','Lisa, rugosa y áspera','Clara, media y oscura','Fría, cálida y neutra'),
+m('Describe 2 afecciones de la piel.','Dermatitis (reacción alérgica por contacto o estrés) y psoriasis','Alopecia y canas','Caspa y frizz','Tiña y pediculosis'),
+m('¿Qué herramientas y materiales ocupamos en el espacio de trabajo?','Skin care, kit básico, brochas, bases y correctores','Tijeras, navaja y plancha','Tintes y peróxido','Secadora y cepillos'),
+m('¿Qué es el visagismo?','El estudio de las armonías del rostro','Un tipo de maquillaje de novia','Una técnica de corte','Un tratamiento de la piel'),
+m('Escribe los tipos de cejas que conocemos.','Angulosa, recta, curva, delgada o fina y curva angulosa','Corta, larga y mediana','Roja, negra y rubia','Lisa, rizada y ondulada'),
+m('Escribe los tipos de rostro.','Redondo, rectangular, triángulo invertido (corazón), pera, cuadrado, diamante y ovalado','Plano, hundido y alto','Claro, medio y oscuro','Seco, graso y mixto'),
+m('¿Cuál es la función de los correctores (café, verde y amarillo)?','Amarillo cubre manchas; verde, brotes de acné; café disminuye o corrige partes prominentes','Todos sirven para dar brillo','Todos se usan sólo en los labios','Amarillo delinea; verde sella; café hidrata'),
+m('Tipos de base de maquillaje.','Crema, líquido ligero y polvos compactos','Gel, aceite y cera','Sólo líquida','Sombra, rubor y labial'),
+m('Pasos para la preparación de la piel.','Limpiar, tónico (nivelador de pH), sérum, crema hidratante, protector solar y primer; dejar reposar 2 min','Base, polvo y rubor','Sombra, delineador y máscara','Sólo aplicar polvo compacto'),
+m('Escribe las partes del ojo.','Ceja, párpado móvil, párpado fijo, pliegue, comisura, línea de pestañas, lagrimal y supercilial','Cutícula, corteza y médula','Epidermis, dermis e hipodermis','Frontal, nuca y coronilla'),
+m('Menciona los tipos de ojos.','Separados, juntos, pequeños y grandes','Rojos, azules y verdes','Secos, grasos y mixtos','Altos, medios y bajos'),
+m('Menciona los tipos de armonías del círculo cromático.','Análoga, complementaria, tríada y monocromática','Cálida, fría y neutra','Primaria, secundaria y terciaria','Clara, media y oscura'),
+m('Menciona los difuminados de sombra que conocemos.','Semi cut crease, smokey eyes y corte en C','Balayage, contorno y herradura','Degrafilado, flor y estrella','Cat eye, egipcio y clásico'),
+m('¿Cuáles son los colores primarios en el círculo de color?','Amarillo, azul y rojo','Verde, naranja y violeta','Rojo, verde y azul','Amarillo, naranja y verde'),
+m('Está formada con un color primario combinado con los colores adyacentes.','Análoga','Complementaria','Tríada','Monocromática'),
+m('¿Cuándo combinamos colores opuestos hablamos de una armonía…?','Complementaria','Análoga','Monocromática','Tríada'),
+m('Menciona los colores cálidos.','Rojo, amarillo y naranja','Azul, violeta y verde','Verde, azul y gris','Violeta, rosa y azul'),
+m('Menciona los colores fríos.','Azul, violeta y verde','Rojo, amarillo y naranja','Naranja, rojo y rosa','Amarillo, dorado y café'),
+m('Armonía que usa 3 colores del círculo cromático. ¿Cuál es su nombre?','Tríada','Análoga','Complementaria','Monocromática'),
+m('Está formada por 2 pares de colores.','Complementaria doble (tétrada)','Monocromática','Tríada','Análoga'),
+m('Tipos de labios y tip para mayor adherencia del color y evitar desbordamiento.','Labios descendentes y finos; tip: delinear','Labios rojos y rosas; tip: dejar sin base','Labios grandes y pequeños; tip: aplicar gloss primero','Labios secos; tip: no hidratar'),
+m('Dibuja o escribe 3 formas de aplicar el rubor.','Diagonal, ascendente y circular','Vertical, zigzag y espiral','Sólo recto','Sólo bajo la barbilla'),
+m('Escribe 3 estilos de delineado para ojos.','Clásico, egipcio y cat eye','Smokey, corte en C y semi cut crease','Diagonal, recto y circular','Balayage, ombré y tropical'),
+m('¿En qué presentaciones encontramos el delineador para ojos?','Pomada o crema, plumón, líquido y lápiz','Sólo polvo','Spray y aerosol','Gel capilar y cera'),
+m('¿Qué función hace la máscara de pestaña?','Alargar naturalmente la pestaña, darle más grosor y color','Hidratar el párpado','Cubrir ojeras','Delinear la ceja'),
+m('Escribe los tipos de maquillaje.','Social de día, social de noche, diario, pasarela, novia y XV años','Sólo social y novia','Ligero, medio y pesado','Natural, teñido y permanente'),
+m('Función principal de los puntos de luz.','Realzar y elevar','Disminuir y ocultar','Hidratar la piel','Delinear el ojo'),
+m('Escribe los colores del círculo cromático (en orden).','Amarillo, amarillo verdoso, verde, azul verdoso, azul, azul violeta, violeta, rojo violeta, rojo, rojo naranja, naranja, amarillo naranja','Sólo rojo, azul y amarillo','Blanco, gris y negro','Verde, café y rosa'),
+];
+const Es=[
+m('¿Cuáles son las posturas correctas que debe tener un estilista para realizar un servicio?','Siempre postura derecha, detrás de nuestro cliente','Encorvado para ver mejor','Sentado sin apoyar la espalda','Con el peso en una sola pierna'),
+m('¿Cómo debe ser el pensamiento de un estilista?','Siempre positivo, abierto, con escucha activa del cliente','Cerrado y rígido','Impositivo, sin escuchar','Indiferente a las necesidades del cliente'),
+m('¿Qué partes de nuestro cuerpo debemos cuidar mayormente?','Espalda, muñecas, rodillas, piernas, cintura y sobre todo nuestro pensamiento','Sólo las manos','Sólo los pies','Sólo la vista'),
+m('Escribe las partes de la cabeza.','Coronilla, cabeza alta, cabeza media, parietales y nuca','Cutícula, corteza y médula','Raíz, medios y puntas','Frente, mejilla y mentón únicamente'),
+m('Escribe las partes del cabello.','Crecimiento, medios y puntas','Corteza, médula y cutícula','Coronilla, nuca y parietal','Papila, bulbo y folículo'),
+m('¿Qué es el cabello?','Parte importante de la persona; refleja autoestima y salud','Un músculo del rostro','Una capa de la piel','Un órgano interno'),
+m('¿Qué compone la estructura física del cabello?','Queratina (proteínas), melanina, agua y lípidos','Sólo agua','Hueso y cartílago','Sólo melanina'),
+m('¿Qué compone la estructura interna del cabello?','Médula, corteza y cutícula','Epidermis, dermis e hipodermis','Raíz, tallo y bulbo','Crecimiento, medios y puntas'),
+p('Fases de crecimiento del cabello y su descripción.',[['Anágena','Crecimiento'],['Catágena','Transición'],['Telógena','Descanso y caída']]),
+m('¿El cabello está mayormente constituido por?','Puentes de hidrógeno, puentes de sal y puentes disulfuro','Sólo agua','Sólo grasa','Puentes ácidos únicamente'),
+m('¿Sustancia química presente en las células de la corteza que produce la coloración?','Melanina','Queratina','Colágeno','Sebo'),
+m('Escribe las propiedades físicas del cabello.','Elasticidad y plasticidad','Brillo y olor','Peso y color','Longitud y volumen'),
+m('¿A qué se refiere la plasticidad en el cabello?','A la facilidad con que el cabello se moldea','A su capacidad de estirarse y regresar','A su color','A su grosor'),
+m('Escribe los tipos de cabello.','Lacio, ondulado, rizado y afro','Graso, seco y mixto','Claro, medio y oscuro','Fino, medio y chino'),
+m('Productos cosméticos para cuidar nuestro cabello.','Buen shampoo, mascarillas y protectores de calor','Sólo agua','Peróxido y decolorante','Gel y cera únicamente'),
+m('Procedimiento de aplicación de tratamiento.','Identificar tipo de cabello y zona (raíz, medios o puntas), aplicar con gorro térmico y calor 5 min','Aplicar sobre cabello sucio y no enjuagar','Sólo secar con secadora','Aplicar peróxido y esperar'),
+m('Escribe algunas afecciones del cabello.','Foliculosis, tiña, infección y dermatitis capilar','Canas y puntas abiertas','Frizz y resequedad','Cabello lacio y rizado'),
+m('Escribe las alteraciones capilares del cabello.','Caspa, caída de cabello y alopecia','Tiña y foliculosis','Canas únicamente','Cabello graso únicamente'),
+m('Escribe los trastornos del cabello.','Canas','Caspa','Alopecia','Tiña'),
+m('¿Cuáles son las formas que realizamos en los esculpidos capilares?','Rectangular, cuadrado, redondo y triangular','Lacio, rizado y ondulado','Horizontal, vertical y diagonal','Recto, inclinado y atrás'),
+m('Escribe las particiones que utilizamos para un esculpido capilar.','Horizontales, diagonales y verticales','Cuadradas y redondas','Rectas y curvas únicamente','Sólo horizontales'),
+m('¿Cuáles son las distribuciones que trabajamos en esculpido capilar?','Caída natural, variable, perpendicular y direccional','Horizontal y vertical','Recta y curva','Seca y húmeda'),
+m('Posiciones de cabeza que debe tener nuestro modelo.','Recto, inclinado hacia delante y hacia atrás','Sólo recto','Sólo de lado','Con la cabeza hacia arriba'),
+m('¿Qué es la línea de diseño?','Móvil y estable','Sólo estable','Una partición','Un ángulo'),
+m('¿Cuáles son las técnicas de texturizado?','Recto, entresacado, peinado (zigzag) y deslizamiento','Cardado y crepé','Balayage y contorno','Plancha y tenaza'),
+m('Cortes que realizamos en este curso.','Recto, redondo, convexo a 45° y 90°, bob, capas, degrafilado, escolar, flor, estrella, caballero y bordado','Sólo corte recto','Permanente y alaciado','Sólo bob'),
+];
+const Pe=[
+m('¿Qué es peinado?','Técnica para dar forma al cabello y una apariencia embellecedora, con técnicas y herramientas','Un tratamiento de la piel','Un corte de cabello','Un tipo de tinte'),
+p('¿Qué instrumento alisa el cabello y cuál da rizos? (rizos angulares / curvilíneos)',[['Rizos angulares','Plancha'],['Rizos curvilíneos','Tenaza']]),
+m('¿Qué distribuye el cabello y con él se realizan las secciones y particiones?','Peine de cola','Mariposa','Cepillo redondo','Pico de garza'),
+m('¿Qué artículo sujeta el cabello que no se está trabajando?','Mariposa','Peine de cola','Tenaza','Spray'),
+m('¿Qué hace el cepillo redondo?','Moldea el cabello con la técnica de brushing','Distribuye particiones','Fija el peinado','Protege del calor'),
+m('Función de los productos cosméticos para peinado.','Fijar el peinado; también dar volumen, brillo y limpieza al cabello','Teñir el cabello','Cortar las puntas','Decolorar'),
+m('¿Qué sujeta el cabello sobre el volumen realizado dentro del diseño?','Picos de garza','Mariposas','Peine de cola','Tenaza'),
+m('¿Cuál es la función del relleno de cabello?','Dar volumen y altura al peinado y llenar espacios donde no los hay','Alaciar','Teñir','Hidratar'),
+m('Producto que fija los moldeados y se recomienda para diseños con volumen.','Spray fijador de máxima fijación (o polvo voluminizador)','Shampoo','Protector de calor','Mascarilla'),
+m('Producto que protege el cabello antes de someterlo a herramientas de calor.','Protector de calor','Spray fijador','Shampoo clarificante','Gel'),
+m('Técnica para lograr un mayor o menor volumen.','Grados de elevación','Cardado únicamente','Brushing','Alaciado'),
+];
+const EX={'Colorimetría':Q,'Maquillaje':Mq,'Estilismo, Higiene y Corte':Es,'Peinado':Pe};
+const sel=document.getElementById('ex');Object.keys(EX).forEach(k=>sel.add(new Option(k,k)));
+sel.onchange=()=>{Q=EX[sel.value];document.getElementById('h').textContent='Examen '+sel.value+' – Repaso';render()};
 function star(a){const c=[['Amarillo','#f5d100',0],['Naranja','#f28c1e',60],['Rojo','#d62828',120],['Violeta','#7b2cbf',180],['Azul','#1d4ed8',240],['Verde','#2a9d3f',300]];
 let s='<svg viewBox="0 0 300 280" width="260"><g stroke="currentColor" fill="none" stroke-width="2"><polygon points="150,10 270,215 30,215"/><polygon points="150,260 270,55 30,55"/><polygon points="150,95 190,118 190,162 150,185 110,162 110,118"/></g>';
 c.forEach(([n,col,d])=>{const r=Math.PI*(d-90)/180,cx=150+118*Math.cos(r),cy=135+118*Math.sin(r);
@@ -89,18 +171,29 @@ return s+'</svg>'}
 function head(){return '<svg viewBox="0 0 200 240" width="200"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M40 120C30 40 80 15 100 15s70 25 60 105c-5 40-20 55-20 70H60c0-15-15-30-20-70z"/><path d="M60 190v35h80v-35"/></g></svg>'}
 let mode=1,key=false;
 function opts(c,d,r){const a=d.slice(0,3);a.splice(r%(a.length+1),0,c);return a}
-function render(){const o=document.getElementById('out');let h='',K=[];
+let S={};
+function render(){const o=document.getElementById('out'),E=sel.value;let h='',K=[],id=0;
+const nm=()=>E+'|'+mode+'|'+(id++);
+const ta=()=>'<textarea rows="2" placeholder="Escribe tu respuesta" data-n="'+nm()+'"></textarea>';
+const ip=()=>'<input type="text" data-n="'+nm()+'">';
+const rg=(arr,ci,inl)=>{const n=nm();return arr.map((t,j)=>'<label class="'+(inl?'i ':'o ')+(j===ci?'right':'')+'"><input type="radio" name="'+n+'" value="'+j+'" data-ok="'+(j===ci?1:0)+'"'+(S[n]==j?' checked':'')+'> '+L[j]+') '+t+'</label>').join('')};
 Q.forEach((q,i)=>{const n=i+1;h+='<div class="q"><b class="n">'+n+'.</b> '+q.t;
 if(q.k==='star')h+=star(mode===2);
 else if(q.k==='head')h+=head();
-else if(q.k==='m'){if(mode===1)h+='<div class="line"></div><div class="line"></div>';else{const a=opts(q.c,q.d,i);K.push(n+L[a.indexOf(q.c)]);a.forEach((t,j)=>h+='<div class="o'+(t===q.c?' right':'')+'">'+L[j]+') '+t+'</div>')}}
-else if(q.k==='p'){q.P.forEach(([l,ans],j)=>{if(mode===1)h+='<div class="pt">'+l+': ________________</div>';else{const pool=[...new Set(q.P.map(z=>z[1]))].filter(z=>z!==ans);const d=[];for(let t=0;t<Math.min(3,pool.length);t++)d.push(pool[(j+t)%pool.length]);const a=opts(ans,d,i+j);K.push(n+'.'+(j+1)+L[a.indexOf(ans)]);h+='<div class="pt">'+l+':<br>'+a.map((t,z)=>'<span class="'+(t===ans?'right':'')+'">'+L[z]+') '+t+'</span>').join(' &nbsp; ')+'</div>'}})}
-else if(q.k==='x'){q.I.forEach((t,j)=>{if(mode===1)h+='<div class="pt">'+t+' → ________</div>';else{K.push(n+'.'+(j+1)+L[q.A[j]]);h+='<div class="pt">'+t+'<br>'+q.O.map((z,y)=>'<span class="'+(y===q.A[j]?'right':'')+'">'+L[y]+') '+z+'</span>').join(' &nbsp; ')+'</div>'}});if(mode===1)h+='<div class="meta" style="margin-left:18px">Opciones: '+q.O.join(' · ')+'</div>'}
+else if(q.k==='m'){if(mode===1)h+=ta();else{const a=opts(q.c,q.d,i),ci=a.indexOf(q.c);K.push(n+L[ci]);h+=rg(a,ci)}}
+else if(q.k==='p'){q.P.forEach(([l,ans],j)=>{if(mode===1)h+='<div class="pt">'+l+': '+ip()+'</div>';else{const pool=[...new Set(q.P.map(z=>z[1]))].filter(z=>z!==ans);const d=[];for(let t=0;t<Math.min(3,pool.length);t++)d.push(pool[(j+t)%pool.length]);const a=opts(ans,d,i+j),ci=a.indexOf(ans);K.push(n+'.'+(j+1)+L[ci]);h+='<div class="pt">'+l+':<br>'+rg(a,ci,1)+'</div>'}})}
+else if(q.k==='x'){if(mode===1)h+='<div class="meta" style="margin-left:18px">Opciones: '+q.O.join(' · ')+'</div>';q.I.forEach((t,j)=>{if(mode===1)h+='<div class="pt">'+t+' → '+ip()+'</div>';else{K.push(n+'.'+(j+1)+L[q.A[j]]);h+='<div class="pt">'+t+'<br>'+rg(q.O,q.A[j],1)+'</div>'}})}
 h+='</div>'});
 if(mode===2)h+='<div class="q"><b>Clave:</b> <span class="meta">'+K.join(' · ')+'</span></div>';
-o.innerHTML=h;o.className=key&&mode===2?'k':'';document.getElementById('bk').style.display=mode===2?'':'none'}
+o.innerHTML=h;o.className=key&&mode===2?'k':'';
+o.querySelectorAll('[data-n]').forEach(e=>e.value=S[e.dataset.n]||'');
+bk.style.display=bg.style.display=mode===2?'':'none';sc.textContent=''}
+document.getElementById('out').addEventListener('input',e=>{const t=e.target;if(t.dataset.n)S[t.dataset.n]=t.value;if(t.type==='radio')S[t.name]=t.value});
+bg.onclick=()=>{let ok=0,tot=0,un=0;const g={};out.querySelectorAll('input[type=radio]').forEach(r=>{(g[r.name]=g[r.name]||[]).push(r)});
+Object.values(g).forEach(a=>{tot++;a.forEach(r=>r.parentElement.classList.remove('good','bad'));const c=a.find(r=>r.checked);if(!c){un++;return}if(c.dataset.ok==='1'){ok++;c.parentElement.classList.add('good')}else c.parentElement.classList.add('bad')});
+sc.textContent='Aciertos: '+ok+' / '+tot+(un?' ('+un+' sin responder)':'')};
 b1.onclick=()=>{mode=1;b1.className='on';b2.className='';render()};
 b2.onclick=()=>{mode=2;b2.className='on';b1.className='';render()};
-bk.onclick=()=>{key=!key;bk.textContent=key?'Ocultar clave':'Mostrar clave';render()};
+bk.onclick=()=>{key=!key;bk.textContent=key?'Ocultar clave':'Mostrar clave';out.className=key?'k':''};
 render();
 </script></body></html>
