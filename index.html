@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Examen Colorimetría – Repaso</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#fff;--fg:#222;--mut:#666;--bd:#ddd;--ac:#b03a7a;--ok:#e6f4ea}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1b1f;--fg:#eee;--mut:#aaa;--bd:#444;--ac:#e07ab0;--ok:#1f3a2a}}
+:root[data-theme="dark"]{--bg:#1b1b1f;--fg:#eee;--mut:#aaa;--bd:#444;--ac:#e07ab0;--ok:#1f3a2a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:760px;margin:auto;padding:16px}
+h1{font-size:1.4rem;margin:.2rem 0;color:var(--ac)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--bd);z-index:2}
+button{border:1px solid var(--ac);background:none;color:var(--ac);padding:6px 12px;border-radius:8px;font:inherit;cursor:pointer}
+button.on{background:var(--ac);color:#fff}
+.q{padding:10px 0;border-bottom:1px solid var(--bd);break-inside:avoid}
+.q b.n{color:var(--ac)}
+.o{margin:2px 0 2px 18px}
+.line{border-bottom:1px solid var(--mut);height:1.6em;margin:4px 0 4px 18px}
+.pt{margin:3px 0 3px 18px}
+.k .right{background:var(--ok);border-radius:4px;font-weight:600}
+.meta{color:var(--mut);font-size:.9rem}
+svg{max-width:100%;height:auto;display:block;margin:8px auto}
+@media print{.bar{display:none}}
+</style></head><body><main>
+<h1>Examen Colorimetría – Repaso</h1>
+<p class="meta">Centro de Estilismo Profesional · Nombre: ____________________ Fecha: __________</p>
+<div class="bar"><button id="b1" class="on">1 · Sin respuestas</button><button id="b2">2 · Opción múltiple</button><button id="bk" style="display:none">Mostrar clave</button><button onclick="print()">Imprimir</button></div>
+<div id="out"></div>
+<p class="meta">Algunas respuestas (22, 35, 36, 38, 44) dependen del manual del curso; verifícalas con tu material.</p>
+</main>
+<script>
+const L='ABCD';
+const m=(t,c,...d)=>({k:'m',t,c,d});
+const p=(t,P)=>({k:'p',t,P});
+const x=(t,I,O,A)=>({k:'x',t,I,O,A});
+const Q=[
+m('¿Cuál es la principal área de trabajo del estilista?','El cabello','La piel','Las uñas','El rostro'),
+m('¿De qué está formado un cabello?','Fibra de queratina constituida por una raíz y un tallo','Grasa y agua únicamente','Fibra de colágeno con bulbo y papila','Células de melanina'),
+x('Une con una flecha según la fase correspondiente.',['Está pegado a la papila, nace y crece. Dura entre 4 y 6 años','Fase de transición, dura unas 3 semanas. El bulbo toma aspecto cilíndrico','Fase de descanso y caída, dura aproximadamente 3 meses'],['Fase anágena','Fase catágena','Fase telógena'],[0,1,2]),
+m('Escribe las propiedades físicas del cabello.','Elasticidad, resistencia, porosidad y propiedades eléctricas','Elasticidad, brillo, grosor y olor','Porosidad, pH, temperatura y volumen','Resistencia, humedad, longitud y peso'),
+m('¿Pigmento que da color al cabello virgen?','Melanina','Queratina','Caroteno','Hemoglobina'),
+m('¿Qué es el color?','Una sensación visual que da al cabello una apariencia diferente','Una proteína del cabello','Un producto químico oxidante','El grosor de la fibra'),
+m('Se define como el nivel o clasificación de los colores claros, medios u oscuros.','Altura de tono','Saturación','Matiz','Reflejo'),
+m('Escribe los 2 tipos de melaninas.','Eumelanina y feomelanina','Melanina y queratina','Eumelanina y caroteno','Feomelanina y cistina'),
+p('Escribe lo que corresponda.',[['Eumelanina es más abundante en cabellos…','Oscuros'],['Feomelanina es más abundante en cabellos…','Rubios y rojos'],['Más eumelanina + menos feomelanina =','Castaño'],['Más feomelanina + menos eumelanina =','Rubio']]),
+m('¿Cuáles son los 3 atributos con los que cuenta el color?','Tono (matiz), valor (luminosidad) y saturación','Brillo, textura y altura','Reflejo, volumen y opacidad','Primario, secundario y terciario'),
+p('Escribe el inciso (a Saturación, b Tono, c Matiz, d Valor).',[['Estado puro de cada color, por el que damos nombre a cada color','b) Tono'],['Permite distinguir un tono de otro, por su recorrido en el círculo cromático','c) Matiz'],['Grado de claridad u oscuridad de un color','d) Valor'],['Viveza o palidez de un color','a) Saturación']]),
+m('Ciencia que estudia la medida de los colores y desarrolla métodos para su cuantificación.','Colorimetría','Cromoterapia','Tricología','Fotometría'),
+m('Escribe los 3 colores primarios.','Rojo, azul y amarillo','Verde, naranja y violeta','Rojo, verde y azul','Amarillo, naranja y rojo'),
+m('Escribe los colores secundarios y su característica.','Violeta, verde y naranja; se obtienen de la mezcla de dos primarios','Rojo, azul y amarillo; son puros','Café, gris y negro; mezclas de neutros','Verde, rojo y azul; se obtienen de un primario y blanco'),
+{k:'star',t:'Dibuja la estrella de color.'},
+m('¿Qué color resulta de la mezcla de un color primario con su complementario?','Café (marrón)','Verde','Violeta','Naranja'),
+x('Une según corresponda.',['Los colores en oposición en el círculo cromático se neutralizan al combinarse','Un tinte no puede ser aclarado con otro tinte','Los colores fríos dominan a los cálidos'],['Primera Ley de Color','Segunda Ley de Color','Tercera Ley de Color'],[0,1,2]),
+p('Escribe las neutralizaciones de los colores.',[['Cenizo neutraliza…','Cobrizo'],['Irisado neutraliza…','Dorado'],['Caoba neutraliza…','Verde']]),
+m('Corresponde al grado de opacidad del color y es la característica del cabello natural.','Reflejo','Altura de tono','Saturación','Valor'),
+m('Corresponde a las variaciones de claridad u oscuridad del cabello.','Altura de tono','Reflejo','Matiz','Pigmento'),
+p('Escribe las alturas de tono.',[['1','Negro'],['2','Moreno'],['3','Castaño oscuro'],['4','Castaño medio'],['5','Castaño claro'],['6','Rubio oscuro'],['7','Rubio medio'],['8','Rubio claro'],['9','Rubio muy claro'],['10','Rubio extra claro']]),
+m('Escribe el significado de Altura y Tono.','Altura: nivel de claridad u oscuridad (1–10) · Tono: reflejo o matiz','Altura: reflejo · Tono: nivel de claridad','Altura: saturación · Tono: porosidad','Altura: longitud del cabello · Tono: grosor'),
+m('Amarillo verdoso, rojo, rojo naranja, naranja y amarillo son tonalidades…','Cálidas','Frías','Neutras','Cenizas'),
+m('¿Cuáles son las tonalidades frías?','Violeta, azul y verde azulado','Rojo, naranja y amarillo','Dorado, cobrizo y caoba','Amarillo, naranja y rojo'),
+m('Ellos se incorporan al color, no modifican sustantivamente el color, pero hacen variar su altura de tono.','Reflejos','Pigmentos','Oxidantes','Alturas'),
+p('Completa la tabla de reflejos: color que lo compone.',[['1 Cenizo','Azul'],['2 Nacarado','Rojo-azul'],['3 Dorado','Amarillo'],['4 Cobrizo','Naranja'],['5 Caoba','Rojo-violeta'],['6 Rojo','Rojo'],['7 Verde','Verde']]),
+p('Escribe las 5 combinaciones de reflejo.',[['0.1 (un solo número)','Reflejo natural'],['0.11 (dos números iguales)','Reflejo profundo'],['0.01 (presencia del 0 antes)','Reflejo suave'],['0.10 (presencia del 0 después)','Reflejo intenso'],['0.12 (dos números diferentes)','El primer número tiene mayor pigmento que el segundo']]),
+m('¿Es conocido como agua oxigenada o dioxidano; compuesto químico con características de un líquido altamente polar?','Peróxido','Amoníaco','Decolorante','Shampoo clarificante'),
+p('Escribe los volúmenes del peróxido y su efecto.',[['10 vol','Deposita color (0 niveles)'],['20 vol','Aclara 1 a 2 niveles'],['30 vol','Aclara 2 a 3 niveles'],['40 vol','Súper aclara (3 a 4 niveles)']]),
+m('Escribe 3 tipos de tintes.','Temporal, semipermanente y permanente','Ácido, básico y neutro','Líquido, polvo y gel','Vegetal, mineral y animal'),
+m('Cálculo matemático: quiero un rubio extra claro (10) y tengo un cabello en altura 4. ¿Cuál será mi tonalidad?','7 (rubio medio)','14','6 (chocolate)','10 (rubio extra claro)'),
+m('Escribe 3 formulaciones de tinte.','1+1, 1+1½ y 1+2','2+2, 3+3 y 1+5','1+0, 0+1 y ½+½','1+3, 1+4 y 1+5'),
+m('Escribe materiales a utilizar en este módulo de colorimetría.','Peine de cola, peine de araña, brocha, guantes, mariposas, capa, vasito medidor, papel aluminio, toalla, peróxido y decolorante','Plancha, rizador, secadora y tijeras','Navaja, cera, gel y espuma','Tintes de fantasía, glitter y pinturas'),
+m('¿Qué característica tiene un cabello cano?','Es opaco; no tiene melanina','Tiene exceso de eumelanina','Es más brillante y flexible','Tiene feomelanina en exceso'),
+m('¿Cuáles son los tipos de cana que viste en este módulo?','Cana rebelde (resistente) y cana normal','Cana grasa y cana seca','Cana natural y cana teñida','Cana fría y cana cálida'),
+m('Escribe las formulaciones de tinte para cabello cano.','1+1, 1+1½ y ½ TN + ½ TD (tono natural + tono deseado) con 1½ de peróxido','Sólo 1+3 con peróxido de 10 vol','Sólo decolorante 1+2','Sólo ½ TD sin peróxido'),
+m('¿En qué consiste la decoloración capilar?','Quitar el color natural del cabello para agregarle un color artificial; el producto penetra la cutícula y actúa en el interior del cabello','Depositar color sobre la cutícula','Cubrir canas con tinte','Eliminar la grasa del cuero cabelludo'),
+m('Escribe las etapas de decoloración.','Rojo (1–4), rojo-naranja, naranja, naranja-amarillo, amarillo-naranja, amarillo, amarillo pálido (10)','Amarillo, naranja, rojo, violeta, azul','Azul, verde, amarillo, naranja, rojo','Negro, gris, blanco, rojo, café'),
+m('Se le llama así: proceso de decoloración global para retirar tinte negro o rojo.','Extracción de tinte','Balayage','Matizado','Retoque de raíz'),
+m('Escribe las formulaciones para extracción de color.','1+1+1 (decolorante + peróxido + shampoo) y 1+2+2','1+1 y 1+2 únicamente','3+3+3','1+5+5'),
+m('Situación 1: crecimiento de 6 cm en tono 3 (castaño oscuro), medios a puntas tono 7 (rubio medio). Desea diseño muy difuminado desde el crecimiento, base similar a su cabello natural. ¿Qué procedimiento?','Balayage con decolorante y cubrir las puntas con tono 4','Tinte global tono 10','Permanente','Sólo shampoo clarificante'),
+m('Situación 2: la modelo usa tono chocolate (6) y desea un tono cobrizo. ¿Qué servicio?','Una extracción de color suave con tinte 7.44','Un balayage con sombra','Decoloración al 40 vol','Un matizador violeta'),
+m('Escribe los diseños de color aprendidos en este módulo.','Universales, balayage con sombra, balayage, tropicales, contorno, puntas de sol, herradura, cortina y brasileñas','Sólo universales y tropicales','Permanente, alaciado y rizado','Corte bob, capas y flequillo'),
+{k:'head',t:'Dibuja y traza el diseño para mechas Tropicales.'},
+m('Explica la regla del 11 y en qué la utilizarías.','Se usa en situaciones de emergencia o para personalizar tus propios tintes','Para calcular el volumen del peróxido','Para medir el tiempo de pose','Para elegir el cepillo'),
+];
+function star(a){const c=[['Amarillo','#f5d100',0],['Naranja','#f28c1e',60],['Rojo','#d62828',120],['Violeta','#7b2cbf',180],['Azul','#1d4ed8',240],['Verde','#2a9d3f',300]];
+let s='<svg viewBox="0 0 300 280" width="260"><g stroke="currentColor" fill="none" stroke-width="2"><polygon points="150,10 270,215 30,215"/><polygon points="150,260 270,55 30,55"/><polygon points="150,95 190,118 190,162 150,185 110,162 110,118"/></g>';
+c.forEach(([n,col,d])=>{const r=Math.PI*(d-90)/180,cx=150+118*Math.cos(r),cy=135+118*Math.sin(r);
+s+='<circle cx="'+cx+'" cy="'+cy+'" r="17" fill="'+(a?col:'none')+'" stroke="currentColor"/>'+(a?'<text x="'+cx+'" y="'+(cy+(d%120?-22:32))+'" font-size="11" text-anchor="middle" fill="currentColor">'+n+'</text>':'')});
+return s+'</svg>'}
+function head(){return '<svg viewBox="0 0 200 240" width="200"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M40 120C30 40 80 15 100 15s70 25 60 105c-5 40-20 55-20 70H60c0-15-15-30-20-70z"/><path d="M60 190v35h80v-35"/></g></svg>'}
+let mode=1,key=false;
+function opts(c,d,r){const a=d.slice(0,3);a.splice(r%(a.length+1),0,c);return a}
+function render(){const o=document.getElementById('out');let h='',K=[];
+Q.forEach((q,i)=>{const n=i+1;h+='<div class="q"><b class="n">'+n+'.</b> '+q.t;
+if(q.k==='star')h+=star(mode===2);
+else if(q.k==='head')h+=head();
+else if(q.k==='m'){if(mode===1)h+='<div class="line"></div><div class="line"></div>';else{const a=opts(q.c,q.d,i);K.push(n+L[a.indexOf(q.c)]);a.forEach((t,j)=>h+='<div class="o'+(t===q.c?' right':'')+'">'+L[j]+') '+t+'</div>')}}
+else if(q.k==='p'){q.P.forEach(([l,ans],j)=>{if(mode===1)h+='<div class="pt">'+l+': ________________</div>';else{const pool=[...new Set(q.P.map(z=>z[1]))].filter(z=>z!==ans);const d=[];for(let t=0;t<Math.min(3,pool.length);t++)d.push(pool[(j+t)%pool.length]);const a=opts(ans,d,i+j);K.push(n+'.'+(j+1)+L[a.indexOf(ans)]);h+='<div class="pt">'+l+':<br>'+a.map((t,z)=>'<span class="'+(t===ans?'right':'')+'">'+L[z]+') '+t+'</span>').join(' &nbsp; ')+'</div>'}})}
+else if(q.k==='x'){q.I.forEach((t,j)=>{if(mode===1)h+='<div class="pt">'+t+' → ________</div>';else{K.push(n+'.'+(j+1)+L[q.A[j]]);h+='<div class="pt">'+t+'<br>'+q.O.map((z,y)=>'<span class="'+(y===q.A[j]?'right':'')+'">'+L[y]+') '+z+'</span>').join(' &nbsp; ')+'</div>'}});if(mode===1)h+='<div class="meta" style="margin-left:18px">Opciones: '+q.O.join(' · ')+'</div>'}
+h+='</div>'});
+if(mode===2)h+='<div class="q"><b>Clave:</b> <span class="meta">'+K.join(' · ')+'</span></div>';
+o.innerHTML=h;o.className=key&&mode===2?'k':'';document.getElementById('bk').style.display=mode===2?'':'none'}
+b1.onclick=()=>{mode=1;b1.className='on';b2.className='';render()};
+b2.onclick=()=>{mode=2;b2.className='on';b1.className='';render()};
+bk.onclick=()=>{key=!key;bk.textContent=key?'Ocultar clave':'Mostrar clave';render()};
+render();
+</script></body></html>
